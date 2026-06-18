@@ -1,0 +1,235 @@
+  /* AESTHETICS */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'VT323', monospace;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      background: url('https://i.pinimg.com/originals/a2/45/ea/a245ea3d6fdd479dbfb9a9c22883daac.gif') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      cursor: url('https://cur.cursors-4u.net/games/gam-13/gam1282.cur'), auto;
+    }
+
+    /* CRT Scanline Overlay */
+    body::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      z-index: 9999;
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+    }
+
+    /* BOOT SEQUENCE */
+    #boot-screen {
+      position: fixed;
+      inset: 0;
+      background-color: #000;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease;
+    }
+    .hacker-text {
+      color: #0f0;
+      text-shadow: 0 0 5px #0f0;
+      font-size: 2rem;
+      text-align: left;
+      width: 80%;
+    }
+    .typing {
+      border-right: .15em solid #0f0;
+      white-space: nowrap;
+      overflow: hidden;
+      animation: typing 2s steps(40, end), blink-caret .75s step-end infinite;
+    }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #0f0; } }
+
+    /* DESKTOP OVERLAY */
+    #desktop {
+      position: relative;
+      height: calc(100vh - 50px);
+      width: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-content: flex-start;
+    }
+
+    .desktop-icon {
+      width: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      padding: 10px;
+      border: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .desktop-icon:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px dotted #0ff;
+    }
+    .desktop-icon img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+      filter: drop-shadow(2px 2px 0px #ff00ff);
+    }
+    .desktop-icon span {
+      background: #000;
+      padding: 2px 6px;
+      font-size: 1.2rem;
+      text-align: center;
+      box-shadow: 2px 2px 0px #0ff;
+    }
+
+    /* Floating Stickers */
+    .sticker {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      filter: drop-shadow(4px 4px 0px #000);
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px) rotate(5deg); }
+    }
+
+    /* WINDOW */
+    .os-window {
+      position: absolute;
+      background: #111;
+      border: 4px solid #ff00ff;
+      box-shadow: 8px 8px 0px #0ff;
+      display: none;
+      flex-direction: column;
+      min-width: 300px;
+      z-index: 10;
+    }
+    
+    .title-bar {
+      background: linear-gradient(90deg, #ff00ff, #8a2be2);
+      padding: 5px 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: grab;
+      border-bottom: 2px solid #0ff;
+    }
+    .title-bar:active { cursor: grabbing; }
+    
+    .title-text {
+      font-size: 1.5rem;
+      color: #fff;
+      text-shadow: 2px 2px 0px #000;
+    }
+    
+    .close-btn {
+      background: #ff0055;
+      border: 2px solid #fff;
+      color: #fff;
+      width: 25px;
+      height: 25px;
+      font-size: 1.2rem;
+      line-height: 1;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 2px 2px 0px #000;
+    }
+    .close-btn:hover { background: #ff4444; }
+
+    .window-content {
+      padding: 15px;
+      flex-grow: 1;
+      overflow-y: auto;
+      max-height: 500px;
+    }
+
+    /* Customize scrollbar */
+    ::-webkit-scrollbar { width: 12px; }
+    ::-webkit-scrollbar-track { background: #000; border-left: 2px solid #ff00ff; }
+    ::-webkit-scrollbar-thumb { background: #0ff; border: 2px solid #000; }
+
+    /* TASKBAR */
+    #taskbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50px;
+      background: #000;
+      border-top: 4px solid #0ff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      z-index: 5000;
+    }
+    
+    #start-btn {
+      background: #ff00ff;
+      color: #fff;
+      border: 3px solid #fff;
+      font-size: 1.5rem;
+      padding: 5px 15px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0px #0ff;
+      font-family: 'VT323', monospace;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #start-btn:active { box-shadow: inset 3px 3px 0px rgba(0,0,0,0.5); transform: translate(2px, 2px); }
+
+    #clock {
+      font-size: 1.8rem;
+      color: #0ff;
+      background: #111;
+      padding: 5px 15px;
+      border: 2px solid #ff00ff;
+    }
+
+    /* APP STYLES */
+    /* Brainrot Oracle */
+    .oracle-box { text-align: center; }
+    .oracle-text { font-size: 2.5rem; color: #ff00ff; text-shadow: 2px 2px 0px #0ff; margin: 20px 0; min-height: 100px; }
+    .btn-glow {
+      background: #000; color: #0ff; border: 3px solid #ff00ff;
+      font-size: 1.8rem; padding: 10px 20px; cursor: pointer;
+      box-shadow: 0 0 10px #ff00ff, inset 0 0 10px #ff00ff;
+      font-family: inherit; transition: 0.2s;
+    }
+    .btn-glow:hover { background: #ff00ff; color: #fff; box-shadow: 0 0 20px #0ff; }
+
+    /* Flappy Game */
+    canvas { background: #87CEEB; border: 4px solid #fff; display: block; margin: 0 auto; }
+    .score-board { font-size: 2rem; text-align: center; color: #0ff; margin-bottom: 10px; }
+
+    /* Paint App */
+    .color-picker { display: flex; gap: 10px; margin-bottom: 10px; justify-content: center; }
+    .color-btn { width: 30px; height: 30px; border: 2px solid #fff; cursor: pointer; }
+    
+    /* Virtual Pet */
+    .pet-container { text-align: center; }
+    .pet-gif { width: 150px; margin: 10px auto; border-radius: 10px; border: 3px dashed #0ff; }
+    .progress-bar { width: 100%; height: 20px; border: 2px solid #fff; background: #000; margin-top: 10px; position: relative;}
+    .progress-fill { height: 100%; background: #0f0; width: 100%; transition: width 0.3s, background 0.3s; }

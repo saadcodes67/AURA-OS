@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA OS</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  
+</head>
+<body>
+
+  <!-- BOOT SEQUENCE -->
+  <div id="boot-screen">
+    <div class="hacker-text">
+      <p>AURA OS BIOS Date 11/04/99 15:23:11</p>
+      <p>Initializing Rizz Protocols...</p>
+      <p>Loading Brainrot.dll... [OK]</p>
+      <p>Bypassing Cringe Check... [FAILED BUT IGNORING]</p>
+      <p class="typing">> Booting AURA OS v.99...</p>
+    </div>
+  </div>
+
+  <!-- DESKTOP BACKGROUND STICKERS -->
+  <img src="elements/insane.gif" class="sticker" style="bottom: 80px; right: 50px; width: 120px; opacity: 0.8;">
+  <img src="elements/son.gif" class="sticker" style="top: 50px; right: 200px; width: 100px;">
+
+  <!-- DESKTOP ICONS -->
+  <div id="desktop">
+    <div class="desktop-icon" onclick="openWindow('win-oracle')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1126/1126012.png" alt="Oracle">
+      <span>Oracle.exe</span>
+    </div>
+    <div class="desktop-icon" onclick="openWindow('win-game')">
+      <img src="https://cdn-icons-png.flaticon.com/512/875/875068.png" alt="Game">
+      <span>Flappy.exe</span>
+    </div>
+    <div class="desktop-icon" onclick="openWindow('win-paint')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1043/1043431.png" alt="Paint">
+      <span>CursedPaint</span>
+    </div>
+    <div class="desktop-icon" onclick="openWindow('win-pet')">
+      <img src="https://cdn-icons-png.flaticon.com/512/1864/1864509.png" alt="Pet">
+      <span>MyPet.bat</span>
+    </div>
+    <div class="desktop-icon" onclick="openWindow('win-vibe')">
+      <img src="https://cdn-icons-png.flaticon.com/512/3011/3011238.png" alt="Vibe">
+      <span>Vibes.mp3</span>
+    </div>
+  </div>
+
+  <!-- WINDOWS -->
+
+  <!-- Brainrot App -->
+  <div class="os-window" id="win-oracle" style="top: 10%; left: 10%;">
+    <div class="title-bar" onmousedown="startDrag(event, 'win-oracle')" ontouchstart="startDrag(event, 'win-oracle')">
+      <span class="title-text">🧠 Brainrot_Oracle.exe</span>
+      <div class="close-btn" onclick="closeWindow('win-oracle')">X</div>
+    </div>
+    <div class="window-content oracle-box">
+      <img src="https://media.tenor.com/2s_1BwL5D7MAAAAi/spinning-skull.gif" style="width: 80px;">
+      <div class="oracle-text" id="quote-display">Press the button for enlightenment...</div>
+      <button class="btn-glow" onclick="generateBrainrot()">GIMME THE AURA</button>
+    </div>
+  </div>
+
+  <!-- Flappy Game -->
+  <div class="os-window" id="win-game" style="top: 15%; left: 30%;">
+    <div class="title-bar" onmousedown="startDrag(event, 'win-game')" ontouchstart="startDrag(event, 'win-game')">
+      <span class="title-text">👽 Flappy_UFO.exe</span>
+      <div class="close-btn" onclick="closeWindow('win-game')">X</div>
+    </div>
+    <div class="window-content">
+      <div class="score-board">SCORE: <span id="flappy-score">0</span></div>
+      <canvas id="gameCanvas" width="320" height="400" onmousedown="jump()" ontouchstart="jump()"></canvas>
+      <p style="text-align:center; margin-top:10px; color:#ff00ff;">Click / Tap the canvas to jump!</p>
+    </div>
+  </div>
+
+  <!-- Neon Paint -->
+  <div class="os-window" id="win-paint" style="top: 20%; left: 50%;">
+    <div class="title-bar" onmousedown="startDrag(event, 'win-paint')" ontouchstart="startDrag(event, 'win-paint')">
+      <span class="title-text">🎨 Cursed_Paint.exe</span>
+      <div class="close-btn" onclick="closeWindow('win-paint')">X</div>
+    </div>
+    <div class="window-content">
+      <div class="color-picker">
+        <div class="color-btn" style="background:#ff00ff;" onclick="changeColor('#ff00ff')"></div>
+        <div class="color-btn" style="background:#0ff;" onclick="changeColor('#0ff')"></div>
+        <div class="color-btn" style="background:#0f0;" onclick="changeColor('#0f0')"></div>
+        <div class="color-btn" style="background:#fff;" onclick="changeColor('#fff')"></div>
+        <div class="color-btn" style="background:#000; border-color:#ff00ff" onclick="changeColor('#000')"></div>
+      </div>
+      <canvas id="paintCanvas" width="400" height="300" style="background:#111; cursor:crosshair; border: 2px solid #0ff;"></canvas>
+      <button class="btn-glow" style="font-size: 1.2rem; margin-top: 10px; width: 100%;" onclick="clearCanvas()">TRASH IT</button>
+    </div>
+  </div>
+
+  <!-- Virtual Pet -->
+  <div class="os-window" id="win-pet" style="top: 30%; left: 20%; width: 300px;">
+    <div class="title-bar" onmousedown="startDrag(event, 'win-pet')" ontouchstart="startDrag(event, 'win-pet')">
+      <span class="title-text">🐱 Tamagotchi_V2</span>
+      <div class="close-btn" onclick="closeWindow('win-pet')">X</div>
+    </div>
+    <div class="window-content pet-container">
+      <p style="font-size:1.5rem; color:#0ff;">Keep my Aura high!</p>
+      <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" class="pet-gif" id="pet-img">
+      <div class="progress-bar">
+        <div class="progress-fill" id="aura-bar"></div>
+      </div>
+      <button class="btn-glow" style="margin-top:15px; font-size:1.5rem;" onclick="feedPet()">FEED SHAWARMA</button>
+    </div>
+  </div>
+
+  <!-- Music/GIF Player -->
+  <div class="os-window" id="win-vibe" style="top: 40%; left: 60%; width: 350px;">
+    <div class="title-bar" onmousedown="startDrag(event, 'win-vibe')" ontouchstart="startDrag(event, 'win-vibe')">
+      <span class="title-text">🎵 Vibes_Player.exe</span>
+      <div class="close-btn" onclick="closeWindow('win-vibe')">X</div>
+    </div>
+    <div class="window-content" style="text-align:center;">
+      <img src="elements/dame tu.gif" style="width:100%; border:4px solid #ff00ff; margin-bottom:10px;">
+      <h3 style="color:#0ff; font-size:2rem; margin-bottom:10px;">NOW PLAYING: SILENCE.MP3</h3>
+      <p>(Too busy to code in a whole music player, just imagine a sick synthwave track playing rn)</p>
+    </div>
+  </div>
+
+  <!-- TASKBAR -->
+  <div id="taskbar">
+    <button id="start-btn" onclick="alert('Start Menu broke. We ball anyway.')">
+      <img src="https://cdn-icons-png.flaticon.com/512/2/2232.png" style="width:20px; filter:invert(1);"> AURA
+    </button>
+    <div id="clock">12:00 PM</div>
+  </div>
+
+</body>
+</html>
