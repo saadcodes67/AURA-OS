@@ -14,7 +14,8 @@ A chaotic, fully interactive Y2K / Vaporwave desktop environment built entirely 
 * Tailwind CSS
 * JavaScript (ES6+)
 
-## Special Thanks to Gemini, I sorta co-engineered alongside it and took help from it in some aspects such as:
+## Special Thanks to Gemini
+I sorta co-engineered alongside it and took help from it in some aspects such as:
   - Physics Engine in the flappy bird rip off
   - Draggable Windows
   - Window Layering
